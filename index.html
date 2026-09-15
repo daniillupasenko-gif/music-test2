@@ -1,0 +1,1096 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>You Are My World</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.60),
+            rgba(0,0,0,0.88)
+        ),
+        url("background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* =========================
+   ОСНОВНОЙ КОНТЕЙНЕР
+========================= */
+
+.container {
+    width: 92%;
+    max-width: 800px;
+
+    margin: auto;
+    padding: 30px 0 50px;
+}
+
+
+/* =========================
+   ЗАГОЛОВОК
+========================= */
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    margin: 0;
+
+    font-size: 32px;
+    letter-spacing: 2px;
+}
+
+.header p {
+    margin-top: 8px;
+
+    color: #aaa;
+    font-size: 14px;
+}
+
+
+/* =========================
+   СПИСОК ПЕСЕН
+========================= */
+
+.playlist {
+    background: rgba(20,20,20,0.85);
+
+    border-radius: 18px;
+
+    padding: 10px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.5);
+}
+
+
+.track {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.track:hover {
+    background: rgba(255,255,255,0.10);
+
+    transform: translateX(4px);
+}
+
+
+.track-number {
+    width: 30px;
+
+    text-align: center;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+
+.track img {
+    width: 55px;
+    height: 55px;
+
+    object-fit: cover;
+
+    border-radius: 7px;
+}
+
+
+.track-info {
+    flex: 1;
+}
+
+
+.track-name {
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+.track-artist {
+    margin-top: 5px;
+
+    color: #999;
+
+    font-size: 14px;
+}
+
+
+.track-arrow {
+    color: #777;
+
+    font-size: 22px;
+}
+
+
+/* =========================
+   ПЛЕЕР
+========================= */
+
+.player {
+    display: none;
+
+    background: rgba(20,20,20,0.88);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.6);
+}
+
+
+/* Кнопка назад */
+
+.back {
+    background: none;
+
+    border: none;
+
+    color: #aaa;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    margin-bottom: 20px;
+}
+
+.back:hover {
+    color: white;
+}
+
+
+/* =========================
+   ОБЛОЖКА
+========================= */
+
+.cover {
+    display: block;
+
+    width: 280px;
+    height: 280px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    margin: auto;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.7);
+}
+
+
+/* =========================
+   ИНФОРМАЦИЯ
+========================= */
+
+.song-info {
+    text-align: center;
+
+    margin-top: 22px;
+}
+
+
+.song-title {
+    font-size: 28px;
+
+    font-weight: bold;
+}
+
+
+.artist {
+    margin-top: 7px;
+
+    color: #999;
+
+    font-size: 16px;
+}
+
+
+/* =========================
+   ПРОГРЕСС
+========================= */
+
+.progress-container {
+    margin-top: 28px;
+}
+
+
+.progress {
+    width: 100%;
+
+    cursor: pointer;
+}
+
+
+.time {
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #999;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   КНОПКИ
+========================= */
+
+.controls {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-top: 20px;
+}
+
+
+.control {
+    background: none;
+
+    border: none;
+
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+
+.control:hover {
+    color: #1ed760;
+}
+
+
+.play {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: white;
+
+    color: black;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.play:hover {
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   ГРОМКОСТЬ
+========================= */
+
+.volume {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+
+.volume input {
+    width: 130px;
+}
+
+
+/* =========================
+   ТЕЛЕФОН
+========================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 94%;
+
+        padding-top: 20px;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
+
+    .cover {
+        width: 230px;
+        height: 230px;
+    }
+
+    .song-title {
+        font-size: 23px;
+    }
+
+    .track {
+        padding: 10px 7px;
+    }
+
+    .track img {
+        width: 50px;
+        height: 50px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         ГЛАВНЫЙ ЭКРАН
+    ========================== -->
+
+    <div id="home">
+
+
+        <div class="header">
+
+            <h1>YOU ARE MY WORLD ❤️</h1>
+
+            <p>My favorite songs</p>
+
+        </div>
+
+
+        <div class="playlist" id="playlist">
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         ЭКРАН ПЛЕЕРА
+    ========================== -->
+
+    <div class="player" id="player">
+
+
+        <button class="back" onclick="showPlaylist()">
+
+            ← Назад
+
+        </button>
+
+
+        <img
+            id="cover"
+            class="cover"
+            src="poater1.jpg"
+        >
+
+
+        <div class="song-info">
+
+            <div
+                id="songTitle"
+                class="song-title"
+            >
+                Песня
+            </div>
+
+
+            <div
+                id="artist"
+                class="artist"
+            >
+                Исполнитель
+            </div>
+
+        </div>
+
+
+        <div class="progress-container">
+
+            <input
+                type="range"
+                id="progress"
+                class="progress"
+
+                min="0"
+                max="100"
+                value="0"
+            >
+
+
+            <div class="time">
+
+                <span id="currentTime">
+                    0:00
+                </span>
+
+                <span id="duration">
+                    0:00
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="controls">
+
+
+            <button
+                class="control"
+                onclick="previousSong()"
+            >
+                ⏮
+            </button>
+
+
+            <button
+                class="play"
+                id="playButton"
+                onclick="togglePlay()"
+            >
+                ▶
+            </button>
+
+
+            <button
+                class="control"
+                onclick="nextSong()"
+            >
+                ⏭
+            </button>
+
+
+        </div>
+
+
+        <div class="volume">
+
+            🔊
+
+            <input
+                type="range"
+                id="volume"
+
+                min="0"
+                max="1"
+                step="0.01"
+
+                value="1"
+            >
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<audio id="audio"></audio>
+
+
+
+<script>
+
+
+/* ==========================================
+   ТВОИ 13 ПЕСЕН
+========================================== */
+
+const songs = [
+
+
+    {
+        name: "Yesterday",
+        artist: "My World",
+        file: "song1.mp3",
+        cover: "poater1.jpg"
+    },
+
+
+    {
+        name: "Only You",
+        artist: "My World",
+        file: "song2.mp3",
+        cover: "poater2.jpg"
+    },
+
+
+    {
+        name: "Until Forever",
+        artist: "My World",
+        file: "song3.mp3",
+        cover: "poater3.jpg"
+    },
+
+
+    {
+        name: "Always",
+        artist: "My World",
+        file: "song4.mp3",
+        cover: "poater4.jpg"
+    },
+
+
+    {
+        name: "Remember",
+        artist: "My World",
+        file: "song5.mp3",
+        cover: "poater5.jpg"
+    },
+
+
+    {
+        name: "Everything",
+        artist: "My World",
+        file: "song6.mp3",
+        cover: "poater6.jpg"
+    },
+
+
+    {
+        name: "My Love",
+        artist: "My World",
+        file: "song7.mp3",
+        cover: "poater7.jpg"
+    },
+
+
+    {
+        name: "You",
+        artist: "My World",
+        file: "song8.mp3",
+        cover: "poater8.jpg"
+    },
+
+
+    {
+        name: "With You",
+        artist: "My World",
+        file: "song9.mp3",
+        cover: "poater9.jpg"
+    },
+
+
+    {
+        name: "One Heart",
+        artist: "My World",
+        file: "song10.mp3",
+        cover: "poater10.jpg"
+    },
+
+
+    {
+        name: "Romance",
+        artist: "My World",
+        file: "song11.mp3",
+        cover: "poater11.jpg"
+    },
+
+
+    {
+        name: "Love",
+        artist: "My World",
+        file: "song12.mp3",
+        cover: "poater12.jpg"
+    },
+
+
+    {
+        name: "Dream",
+        artist: "My World",
+        file: "song13.mp3",
+        cover: "poater13.jpg"
+    }
+
+];
+
+
+/* ==========================================
+   ПЕРЕМЕННЫЕ
+========================================== */
+
+let currentSong = 0;
+
+
+const audio =
+    document.getElementById("audio");
+
+
+const home =
+    document.getElementById("home");
+
+
+const player =
+    document.getElementById("player");
+
+
+const playlist =
+    document.getElementById("playlist");
+
+
+const cover =
+    document.getElementById("cover");
+
+
+const songTitle =
+    document.getElementById("songTitle");
+
+
+const artist =
+    document.getElementById("artist");
+
+
+const playButton =
+    document.getElementById("playButton");
+
+
+const progress =
+    document.getElementById("progress");
+
+
+const currentTime =
+    document.getElementById("currentTime");
+
+
+const duration =
+    document.getElementById("duration");
+
+
+const volume =
+    document.getElementById("volume");
+
+
+
+/* ==========================================
+   СОЗДАЁМ СПИСОК
+========================================== */
+
+function createPlaylist() {
+
+
+    playlist.innerHTML = "";
+
+
+    songs.forEach(function(song, index) {
+
+
+        const track =
+            document.createElement("div");
+
+
+        track.className = "track";
+
+
+        track.innerHTML = `
+
+            <div class="track-number">
+                ${index + 1}
+            </div>
+
+            <img
+                src="${song.cover}"
+            >
+
+            <div class="track-info">
+
+                <div class="track-name">
+                    ${song.name}
+                </div>
+
+                <div class="track-artist">
+                    ${song.artist}
+                </div>
+
+            </div>
+
+            <div class="track-arrow">
+                ›
+            </div>
+
+        `;
+
+
+        track.onclick = function() {
+
+            openPlayer(index);
+
+        };
+
+
+        playlist.appendChild(track);
+
+    });
+
+}
+
+
+
+/* ==========================================
+   ОТКРЫТЬ ПЛЕЕР
+========================================== */
+
+function openPlayer(index) {
+
+
+    currentSong = index;
+
+
+    const song =
+        songs[currentSong];
+
+
+    audio.src =
+        song.file;
+
+
+    cover.src =
+        song.cover;
+
+
+    songTitle.textContent =
+        song.name;
+
+
+    artist.textContent =
+        song.artist;
+
+
+    progress.value = 0;
+
+
+    currentTime.textContent =
+        "0:00";
+
+
+    duration.textContent =
+        "0:00";
+
+
+    home.style.display =
+        "none";
+
+
+    player.style.display =
+        "block";
+
+
+    audio.play();
+
+
+    playButton.textContent =
+        "❚❚";
+
+}
+
+
+
+/* ==========================================
+   НАЗАД К СПИСКУ
+========================================== */
+
+function showPlaylist() {
+
+
+    audio.pause();
+
+
+    player.style.display =
+        "none";
+
+
+    home.style.display =
+        "block";
+
+
+    playButton.textContent =
+        "▶";
+
+}
+
+
+
+/* ==========================================
+   PLAY / PAUSE
+========================================== */
+
+function togglePlay() {
+
+
+    if (audio.paused) {
+
+
+        audio.play();
+
+
+        playButton.textContent =
+            "❚❚";
+
+
+    } else {
+
+
+        audio.pause();
+
+
+        playButton.textContent =
+            "▶";
+
+    }
+
+}
+
+
+
+/* ==========================================
+   СЛЕДУЮЩАЯ ПЕСНЯ
+========================================== */
+
+function nextSong() {
+
+
+    currentSong++;
+
+
+    if (
+        currentSong >= songs.length
+    ) {
+
+        currentSong = 0;
+
+    }
+
+
+    openPlayer(currentSong);
+
+}
+
+
+
+/* ==========================================
+   ПРЕДЫДУЩАЯ ПЕСНЯ
+========================================== */
+
+function previousSong() {
+
+
+    currentSong--;
+
+
+    if (currentSong < 0) {
+
+        currentSong =
+            songs.length - 1;
+
+    }
+
+
+    openPlayer(currentSong);
+
+}
+
+
+
+/* ==========================================
+   ПРОГРЕСС
+========================================== */
+
+audio.addEventListener(
+    "timeupdate",
+    function() {
+
+
+        if (!audio.duration) {
+            return;
+        }
+
+
+        progress.value =
+            (
+                audio.currentTime /
+                audio.duration
+            ) * 100;
+
+
+        currentTime.textContent =
+            formatTime(
+                audio.currentTime
+            );
+
+
+        duration.textContent =
+            formatTime(
+                audio.duration
+            );
+
+    }
+);
+
+
+
+progress.addEventListener(
+    "input",
+    function() {
+
+
+        if (!audio.duration) {
+            return;
+        }
+
+
+        audio.currentTime =
+            (
+                progress.value / 100
+            ) * audio.duration;
+
+    }
+);
+
+
+
+/* ==========================================
+   ВРЕМЯ
+========================================== */
+
+function formatTime(seconds) {
+
+
+    if (isNaN(seconds)) {
+
+        return "0:00";
+
+    }
+
+
+    let minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+
+    let secs =
+        Math.floor(
+            seconds % 60
+        );
+
+
+    if (secs < 10) {
+
+        secs =
+            "0" + secs;
+
+    }
+
+
+    return minutes + ":" + secs;
+
+}
+
+
+
+/* ==========================================
+   ГРОМКОСТЬ
+========================================== */
+
+volume.addEventListener(
+    "input",
+    function() {
+
+
+        audio.volume =
+            volume.value;
+
+    }
+);
+
+
+
+/* ==========================================
+   ПЕСНЯ ЗАКОНЧИЛАСЬ
+========================================== */
+
+audio.addEventListener(
+    "ended",
+    function() {
+
+        nextSong();
+
+    }
+);
+
+
+
+/* ==========================================
+   ЗАПУСК
+========================================== */
+
+createPlaylist();
+
+</script>
+
+</body>
+</html>
